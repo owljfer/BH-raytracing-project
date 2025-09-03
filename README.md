@@ -33,4 +33,4 @@ python rt_blackhole_project.py
 This will open a window displaying the black hole visualization. Close the window to exit.
 
 ## Sample Output
-Screenshots and examples coming soon!
+![Black Hole Visualization](images/blackhole_render.png)
