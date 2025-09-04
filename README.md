@@ -4,14 +4,15 @@ A CPU-based ray tracer implementation showcasing 3D rendering techniques and mat
 
 ## Current Features
 - Ray-sphere intersection
-- Basic black hole visualization with accretion disk
+- Approximated geodesic Schwarzchild black hole visualization with accretion disk and photon sphere
 - OpenGL display integration
+- Pixel processinf using numba
 - Real-time rendering
 
 ## Planned Features
-- [ ] Multiple object types (planes, triangles)
-- [ ] Advanced lighting models
-- [ ] Material system (reflective, refractive)
+- [ ] Add proper geodesic solving, handling complex orbits and multiple disk crosses
+- [ ] Advanced effects (lensing, Kerr black hole, multiple disk components)
+- [ ] Implement interactive controls
 - [ ] Performance optimizations
 - [ ] GPU acceleration
 
@@ -20,6 +21,7 @@ A CPU-based ray tracer implementation showcasing 3D rendering techniques and mat
 - PyOpenGL
 - GLFW
 - NumPy
+- Numba
 
 ## Installation
 ```bash
@@ -33,4 +35,4 @@ python rt_blackhole_project.py
 This will open a window displaying the black hole visualization. Close the window to exit.
 
 ## Sample Output
-![Black Hole Visualization](images/blackhole_render.png)
+![Black Hole Visualization](images/BH_raytrace_SS_V2.png)

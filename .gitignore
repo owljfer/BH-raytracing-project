@@ -1,3 +1,4 @@
+# Python-specific files
 __pycache__/
 *.pyc
 *.pyo
@@ -19,6 +20,12 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# Numba cache
+numba_cache/
+
+# Virtual environment directory (if you use one)
+venv/
 
 # JetBrains IDEs
 .idea/
