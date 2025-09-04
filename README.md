@@ -6,7 +6,7 @@ A CPU-based ray tracer implementation showcasing 3D rendering techniques and mat
 - Ray-sphere intersection
 - Approximated geodesic Schwarzchild black hole visualization with accretion disk and photon sphere
 - OpenGL display integration
-- Pixel processinf using numba
+- Pixel processing using numba
 - Real-time rendering
 
 ## Planned Features
