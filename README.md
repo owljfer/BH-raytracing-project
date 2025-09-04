@@ -35,4 +35,4 @@ python rt_blackhole_project.py
 This will open a window displaying the black hole visualization. Close the window to exit.
 
 ## Sample Output
-![Black Hole Visualization](images/BH_raytrace_SS_V2.png)
+![Black Hole Visualization](images/BH_raytrace_SS_V2.PNG)
