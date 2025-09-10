@@ -8,11 +8,11 @@ A CPU-based ray tracer implementation showcasing 3D rendering techniques and mat
 - OpenGL display integration
 - Pixel processing using numba
 - Real-time rendering
+- Interactive controls of camera and parameters
 
 ## Planned Features
 - [ ] Add proper geodesic solving, handling complex orbits and multiple disk crosses
 - [ ] Advanced effects (lensing, Kerr black hole, multiple disk components)
-- [ ] Implement interactive controls
 - [ ] Performance optimizations
 - [ ] GPU acceleration
 
