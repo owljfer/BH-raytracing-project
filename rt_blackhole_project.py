@@ -231,7 +231,7 @@ def ray_disk_intersection_3d_integrated(alpha, beta, r_cam, r_min, disk_rin, dis
     disk_r = r_min
     
     # Calculate azimuthal angle from ray direction and rotation
-    ray_phi = math.atan2(beta, alpha)
+    ray_phi = math.atan2(beta, alpha) if (alpha != 0.0 or beta != 0.0) else 0.0
     disk_phi = ray_phi + azimuthal_angle
     
     # Add rotation effects based on orbital velocity
@@ -240,27 +240,30 @@ def ray_disk_intersection_3d_integrated(alpha, beta, r_cam, r_min, disk_rin, dis
     disk_phi += rotational_phi
     
     # Calculate height profile - varies with radius and adds 3D structure
-    disk_height_at_r = disk_height * (1.0 + 0.5 * math.cos(disk_phi * 3.0)) * (disk_rout - disk_r) / (disk_rout - disk_rin)
+    base_height_factor = (disk_rout - disk_r) / (disk_rout - disk_rin)
+    disk_height_at_r = disk_height * (1.0 + 0.3 * math.cos(disk_phi * 3.0)) * base_height_factor
     
     # Enhanced probability calculation considering 3D geometry
-    vertical_angle = abs(beta)
+    vertical_angle = abs(beta) if beta != 0.0 else 1e-6
     geometric_thickness = disk_height_at_r / r_cam
     
     # Account for disk warping and 3D structure
-    warp_factor = 1.0 + 0.3 * math.sin(disk_phi * 2.0) * (disk_r - disk_rin) / (disk_rout - disk_rin)
+    warp_factor = 1.0 + 0.2 * math.sin(disk_phi * 2.0) * base_height_factor
     effective_thickness = geometric_thickness * warp_factor
     
     # Hit probability based on ray angle and disk thickness
-    hit_prob = min(1.0, effective_thickness / max(vertical_angle, 1e-6))
+    hit_prob = min(1.0, effective_thickness / vertical_angle)
     
-    # Additional geometric constraints
+    # Additional geometric constraints - be more lenient
     ray_intercept_height = vertical_angle * disk_r
-    if ray_intercept_height > disk_height_at_r * 2.0:
-        return False, 0.0, 0.0, 0.0
+    max_intercept_height = disk_height_at_r * 3.0  # Increased from 2.0
     
-    # Return intersection if probability is sufficient
-    if hit_prob > 0.2:  # Threshold for intersection
-        height_factor = 1.0 - (ray_intercept_height / (disk_height_at_r * 2.0))
+    if ray_intercept_height > max_intercept_height:
+        hit_prob *= 0.5  # Reduce probability but don't eliminate
+    
+    # Return intersection if probability is sufficient - lowered threshold
+    if hit_prob > 0.1:  # Reduced from 0.2 for more hits
+        height_factor = max(0.1, 1.0 - (ray_intercept_height / max_intercept_height))
         return True, disk_r, disk_phi, height_factor
     
     return False, 0.0, 0.0, 0.0
